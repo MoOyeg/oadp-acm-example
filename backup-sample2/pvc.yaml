@@ -10,3 +10,6 @@ spec:
     requests:
       storage: 10Mi
   volumeMode: Filesystem
+  #Storage class is left out. We expect there will be a default storage class that is CSI compliant
+  #storageClassName: gp2
+  

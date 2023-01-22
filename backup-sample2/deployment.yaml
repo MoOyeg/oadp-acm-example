@@ -15,6 +15,10 @@ spec:
       labels:
         app: backup-sample2
     spec:
+      serviceAccountName: backup-sa
+      serviceAccount: backup-sa
+      securityContext:
+        runAsUser: 0        
       volumes:
         - name: backup-sample2
           persistentVolumeClaim:
@@ -33,9 +37,8 @@ spec:
             image-registry.openshift-image-registry.svc:5000/openshift/httpd:latest
           args:
             - '-c'
-            - 'echo "$(date)" > /root/backup-sample2/backup && while :;do sleep infinity;done'
+            - 'echo "$(date)" >> /root/backup-sample2/backup && while :;do sleep infinity;done'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
-      securityContext: {}
       schedulerName: default-scheduler
