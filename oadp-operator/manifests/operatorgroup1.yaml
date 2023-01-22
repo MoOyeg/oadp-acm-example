@@ -1,0 +1,9 @@
+apiVersion: operators.coreos.com/v1alpha2
+kind: OperatorGroup
+metadata:
+  name: openshift-adp-acm
+  namespace: openshift-adp
+spec:
+  targetNamespaces:
+    - openshift-adp
+

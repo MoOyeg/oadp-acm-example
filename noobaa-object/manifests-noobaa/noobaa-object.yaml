@@ -1,0 +1,19 @@
+apiVersion: noobaa.io/v1alpha1
+kind: NooBaa
+metadata:
+  name: noobaa
+  namespace: openshift-storage
+spec:
+ cleanupPolicy:
+   allowNoobaaDeletion: True
+ dbResources:
+   requests:
+     cpu: '0.1'
+     memory: 1Gi
+ dbType: postgres
+ coreResources:
+   requests:
+     cpu: '0.1'
+     memory: 1Gi
+status:
+  phase: Ready

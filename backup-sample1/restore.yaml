@@ -1,0 +1,17 @@
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  name: backup-sample1-20230120230651
+  namespace: openshift-adp
+spec:
+  backupName: backup-sample1
+  excludedResources:
+    - nodes
+    - events
+    - events.events.k8s.io
+    - backups.velero.io
+    - restores.velero.io
+    - resticrepositories.velero.io
+  hooks: {}
+  includedNamespaces:
+    - '*'

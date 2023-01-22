@@ -1,0 +1,12 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    olm.providedAPIs: >-
+      Backup.v1.velero.io,BackupStorageLocation.v1.velero.io,CloudStorage.v1alpha1.oadp.openshift.io,DataProtectionApplication.v1alpha1.oadp.openshift.io,DeleteBackupRequest.v1.velero.io,DownloadRequest.v1.velero.io,PodVolumeBackup.v1.velero.io,PodVolumeRestore.v1.velero.io,ResticRepository.v1.velero.io,Restore.v1.velero.io,Schedule.v1.velero.io,ServerStatusRequest.v1.velero.io,VolumeSnapshotBackup.v1alpha1.datamover.oadp.openshift.io,VolumeSnapshotLocation.v1.velero.io,VolumeSnapshotRestore.v1alpha1.datamover.oadp.openshift.io
+  name: openshift-adp-acm
+  namespace: openshift-adp
+spec:
+  targetNamespaces:
+    - openshift-adp
+  upgradeStrategy: Default

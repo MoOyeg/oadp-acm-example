@@ -1,0 +1,19 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: policy-dpa-restic-patch
+placementBindingDefaults:
+  name: dpa-restic-patch-binding
+policyDefaults:
+  placement:
+    placementRuleName: ocp-placementrule
+  controls:
+    - "CM-2 Baseline Configuration"
+  pruneObjectBehavior: "DeleteIfCreated"
+  namespace: global-policies
+  remediationAction: enforce
+  severity: medium
+policies:
+  - name: policy-dpa-restic-patch
+    manifests:
+      - path: ./manifests

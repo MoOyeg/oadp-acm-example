@@ -1,0 +1,28 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: policy-create-noobaa-object
+placementBindingDefaults:
+  name: openshift-noobaa-binding
+policyDefaults:
+  placement:
+    placementRuleName: ocp-placementrule
+  controls:
+    - "CM-2 Baseline Configuration"
+  pruneObjectBehavior: "DeleteIfCreated"
+  namespace: global-policies
+  remediationAction: enforce
+  severity: medium
+  orderPolicies: true
+  consolidateManifests: false
+policies:
+  - name: policy-check-noobaa-installed
+    manifests:
+      - path: ./manifests-noobaa-crd
+    remediationAction: inform
+  - name: policy-ocp-noobaa-object
+    manifests:
+      - path: ./manifests-noobaa
+  - name: policy-ocp-noobaa-bucket
+    manifests:
+      - path: ./manifests-bucket

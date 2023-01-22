@@ -1,0 +1,19 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: policy-install-volsync-operator
+placementBindingDefaults:
+  name: install-volsync-operator-binding
+policyDefaults:
+  placement:
+    placementRuleName: ocp-placementrule
+  controls:
+    - "CM-2 Baseline Configuration"
+  pruneObjectBehavior: "DeleteIfCreated"
+  namespace: global-policies
+  remediationAction: enforce
+  severity: medium
+policies:
+  - name: policy-volsync-operator
+    manifests:
+      - path: ./manifests

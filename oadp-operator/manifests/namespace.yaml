@@ -1,0 +1,8 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: openshift-adp
+  labels:
+    kubernetes.io/metadata.name: openshift-adp
+    openshift.io/cluster-monitoring: 'true'
+spec: {}

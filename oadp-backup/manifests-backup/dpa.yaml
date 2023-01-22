@@ -1,0 +1,28 @@
+apiVersion: oadp.openshift.io/v1alpha1
+kind: DataProtectionApplication
+metadata:
+  name: dpa-sample
+  namespace: openshift-adp
+spec:
+  configuration:
+    velero:
+      defaultPlugins:
+        - aws
+        - openshift
+        - csi
+  backupLocations:
+    - velero:
+        config:
+          profile: "default"
+          region: minio
+          s3Url: 'https://{{ (lookup "v1" "ConfigMap" "openshift-adp" "oadp-bucket").data.BUCKET_HOST }}:{{ (lookup "v1" "ConfigMap" "openshift-adp" "oadp-bucket").data.BUCKET_PORT }}'
+          insecureSkipTLSVerify: "true"
+          s3ForcePathStyle: "true"
+        provider: aws
+        default: true
+        credential:
+          key: cloud
+          name: odf-bucket-credential
+        objectStorage:
+          bucket: oadp-bucket 
+          prefix: sample

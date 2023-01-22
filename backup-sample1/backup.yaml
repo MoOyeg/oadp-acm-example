@@ -1,0 +1,18 @@
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: backup-sample1
+  namespace: openshift-adp
+  labels:
+    velero.io/storage-location: dpa-sample-1
+spec:
+  defaultVolumesToRestic: false
+  hooks: {}
+  includedNamespaces:
+    - '*'
+  labelSelector:
+    matchLabels:
+      app: backup-sample1
+  metadata: {}
+  storageLocation: dpa-sample-1
+  ttl: 24h

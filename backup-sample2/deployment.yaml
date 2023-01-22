@@ -1,0 +1,41 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: backup-sample2
+  namespace: default
+  labels:
+    app: backup-sample2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backup-sample2
+  template:
+    metadata:
+      labels:
+        app: backup-sample2
+    spec:
+      volumes:
+        - name: backup-sample2
+          persistentVolumeClaim:
+            claimName: pvc-backup-sample2
+      containers:
+        - resources: {}
+          volumeMounts:
+            - name: backup-sample2
+              mountPath: /root/backup-sample2
+          name: container
+          command:
+            - /bin/bash
+          imagePullPolicy: Always
+          terminationMessagePolicy: File
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/openshift/httpd:latest
+          args:
+            - '-c'
+            - 'echo "$(date)" > /root/backup-sample2/backup && while :;do sleep infinity;done'
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
